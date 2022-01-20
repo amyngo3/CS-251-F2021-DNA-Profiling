@@ -11,21 +11,28 @@
 
 using namespace std;
 
+string loadDB(string strand){
+    cout << "loading Database called\n";
+}
+
+string loadDNA(string strand){
+    cout << "DNA loaded:\n";
+}
+
 int main(int argc, char *argv[]) {
     //TODO:  Write your code here.  You should have LOTS of function decomposition.
     ifstream myfile;   // read file input from Linux commands
-    string uCommand, line;
+    string uCommand, strandLine;
     ourvector<string> DNAstrand;
 
     cout << "Welcome to the DNA Profiling Application.\n";
 
     while(uCommand != "#"){
         // ask user for command
-        cout << "Enter command or # to exit: ";
-        cin >> uCommand;
+        getline(cin, uCommand);
 
         // Command: load_db <filename>
-        if(){
+        if(uCommand == "load_db"){
             // file error
             // if(argc != 2){
             //     cout << "usage: ./freq <filename>\nFile error\n";
@@ -38,30 +45,34 @@ int main(int argc, char *argv[]) {
                 return 1;
             }
 
-            // open file
-            if(myfile.is_open()){
-                getline(myfile, line);
-                myfile.close();
+            // filename not given to load database
+            if(filenameInput == ""){
+                cout << "Error: could not load database without filename\n";
             }
-            
-            cout << "Loading database...\n";
+            // open file
+            else if(myfile.is_open()){
+                getline(myfile, strandLine);
+                myfile.close();
+
+                cout << "Loading database...\n";
+            }
         }
         // Command: display
-        else if(){
-            //
-        }
+        // else if(){
+        //     //
+        // }
         // Command: load_dna
-        else if(){
-            //
-        }
+        // else if(){
+        //     //
+        // }
         // Command: process
-        else if(){
-            //
-        }
+        // else if(){
+        //     //
+        // }
         // Command: search
-        else if(){
-            //
-        }
+        // else if(){
+        //     //
+        // }
         else {
             // Unknown command
             cout << "Unknown command. Please try either:\nload_db <filename>\ndisplay\nload_dna\nprocess\nsearch\n";
