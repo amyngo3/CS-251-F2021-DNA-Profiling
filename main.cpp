@@ -91,7 +91,6 @@ int main(/*int argc, char *argv[]*/) {
         }
         // Command: display
         else if(uCommand == "display"){
-            //
             if(people.size()){
                 cout << "Database loaded:\n";
                 for(int i = 0; i < people.size(); i++){
