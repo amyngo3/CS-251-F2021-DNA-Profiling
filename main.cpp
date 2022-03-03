@@ -120,12 +120,19 @@ int main(/*int argc, char *argv[]*/) {
 
             if(!processedDNA.size())
                 cout << "\nNo DNA has been processed.\n";
-            // else {
-            //     cout << "DNA processed, STR counts:\n";
-            //     for(int i = 0; i < DNAsequence.size(); i++){
-            //         //
-            //     }
-            // }
+            else {
+                cout << "\nDNA processed, STR counts:\n";
+                // loop indices of DNAsequence
+                for(int i = 0; i < DNAsequence.size(); i++){
+                    // loop letters of DNAsequence
+                    for(int j = 0; j < DNAsequence[i].size(); j++){
+                        cout << DNAsequence[i][j];
+                    }
+                    cout << ": ";
+                    // print sequence's number
+                    cout << processedDNA[i] << endl;
+                }
+            }
         }
         // Command: load_dna
         else if(uCommand == "load_dna"){
@@ -147,14 +154,11 @@ int main(/*int argc, char *argv[]*/) {
         }
         // Command: process
         else if(uCommand == "process"){
-            // if DNA is loaded
-            if(!DNAstrand.size())
-                cout << "No DNA loaded.\n";
-            
             // if database is loaded
             if(DNAsequence.size()){
                 // loop number of DNAstrand to compare with DNAsequence O(n^3)
                 for(int i = 0; i < DNAstrand.size(); i++){
+                    // frequency of sequence
                     int sequenceNum = 0;
                     // loop DNAsequence size (not letters yet)
                     for(int j = 0; j < DNAsequence.size(); j++){
@@ -163,8 +167,9 @@ int main(/*int argc, char *argv[]*/) {
                         for(int k = 0; k < DNAsequence[j].size(); k++){
                             // if index of DNAstrand has exact letter with index of DNAsequence
                             // i for current index of DNAstrand plus k for index number of DNAsequence
-                            if(DNAstrand[i+k] == DNAsequence[j][k])
-                                counter++;
+                            if(i+k < DNAstrand.size())
+                                if(DNAstrand[i+k] == DNAsequence[j][k])
+                                    counter++;
                         }
                         if(counter == DNAsequence[j].size())
                             sequenceNum++;
@@ -178,6 +183,10 @@ int main(/*int argc, char *argv[]*/) {
             else {
                 cout << "No database loaded.\n";
             }
+
+            // if DNA is loaded
+            if(!DNAstrand.size())
+                cout << "No DNA loaded.\n";
         }
         // Command: search
         // else if(){
