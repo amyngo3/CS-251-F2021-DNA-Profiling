@@ -24,6 +24,7 @@ int main(/*int argc, char *argv[]*/) {
     ourvector<char> DNAstrand;
     ourvector<ourvector<char>> DNAsequence;    // DNA pattern from small.txt or large.txt
     ourvector<Person> people;   // list of people in text file
+    ourvector<int> processedDNA;    // STR count for processed command
 
     cout << "Welcome to the DNA Profiling Application.\n";
 
@@ -50,11 +51,14 @@ int main(/*int argc, char *argv[]*/) {
                 string line;
                 getline(myfile, line);  // gets only first line in text file
                 ourvector<char> v;
+                // loop words in first line
                 for(int i = 5; i < line.length(); i++){
+                    // if found comma, push vector of DNA sequence
                     if(line[i] == ','){
                         DNAsequence.push_back(v);
                         v.clear();
                     }
+                    // if not comma
                     if(line[i] != ','){
                         // push letter
                         v.push_back(line[i]);
@@ -114,7 +118,14 @@ int main(/*int argc, char *argv[]*/) {
                 cout << endl;
             }
 
-            // cout << "\nNo DNA has been processed\n";
+            if(!processedDNA.size())
+                cout << "\nNo DNA has been processed.\n";
+            // else {
+            //     cout << "DNA processed, STR counts:\n";
+            //     for(int i = 0; i < DNAsequence.size(); i++){
+            //         //
+            //     }
+            // }
         }
         // Command: load_dna
         else if(uCommand == "load_dna"){
@@ -136,7 +147,37 @@ int main(/*int argc, char *argv[]*/) {
         }
         // Command: process
         else if(uCommand == "process"){
-            //
+            // if DNA is loaded
+            if(!DNAstrand.size())
+                cout << "No DNA loaded.\n";
+            
+            // if database is loaded
+            if(DNAsequence.size()){
+                // loop number of DNAstrand to compare with DNAsequence O(n^3)
+                for(int i = 0; i < DNAstrand.size(); i++){
+                    int sequenceNum = 0;
+                    // loop DNAsequence size (not letters yet)
+                    for(int j = 0; j < DNAsequence.size(); j++){
+                        int counter = 0;
+                        // loop DNAsequence letters
+                        for(int k = 0; k < DNAsequence[j].size(); k++){
+                            // if index of DNAstrand has exact letter with index of DNAsequence
+                            // i for current index of DNAstrand plus k for index number of DNAsequence
+                            if(DNAstrand[i+k] == DNAsequence[j][k])
+                                counter++;
+                        }
+                        if(counter == DNAsequence[j].size())
+                            sequenceNum++;
+                    }
+                    // push counter in processedDNA
+                    processedDNA.push_back(sequenceNum);
+                }
+                cout << "Processing DNA...\n";
+            }
+            // no loaded DNA strand
+            else {
+                cout << "No database loaded.\n";
+            }
         }
         // Command: search
         // else if(){
