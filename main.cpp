@@ -174,6 +174,7 @@ int main(/*int argc, char *argv[]*/) {
                         if(counter == DNAsequence[j].size())
                             sequenceNum++;
                     }
+                    // cout << sequenceNum << endl;
                     // push counter in processedDNA
                     processedDNA.push_back(sequenceNum);
                 }
