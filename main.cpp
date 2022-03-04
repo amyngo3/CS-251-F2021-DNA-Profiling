@@ -141,9 +141,12 @@ int main(/*int argc, char *argv[]*/) {
             cin >> filename;
 
             myfile.open(filename);
+
             if(!myfile){
                 cout << "\n\tError: unable to open \'" << filename << "\'"<< endl;
             } else {
+                // when called again, must clear DNAstrand to repopulate
+                DNAstrand.clear();
                 string line;
                 getline(myfile, line);
                 for(char c : line){
@@ -230,11 +233,12 @@ int main(/*int argc, char *argv[]*/) {
                     cout << "Not found in database\n";
             }
         }
+        // Exit command
         else if(uCommand == "#"){
             break;
         }
+        // Unknown command
         else {
-            // Unknown command
             cout << "Unknown command. Please try either:\nload_db <filename>\ndisplay\nload_dna\nprocess\nsearch\n";
             cout << "\tNote: The filename should be typed as named in the folder.\n";
         }
