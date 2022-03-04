@@ -118,18 +118,23 @@ int main(/*int argc, char *argv[]*/) {
             if(!processedDNA.size())
                 cout << "\nNo DNA has been processed.\n";
             else {
-                cout << "\nDNA processed, STR counts:\n";
-                // loop indices of DNAsequence
-                for(int i = 0; i < DNAsequence.size(); i++){
-                    // loop letters of DNAsequence
-                    for(int j = 0; j < DNAsequence[i].size(); j++){
-                        cout << DNAsequence[i][j];
+                // check if DNAsequence size matches processedDNA size
+                if(DNAsequence.size() != processedDNA.size())
+                    cout << "\nError: database and processed DNA are not loaded properly.\n";
+                else {
+                    cout << "\nDNA processed, STR counts:\n";
+                    // loop indices of DNAsequence
+                    for(int i = 0; i < DNAsequence.size(); i++){
+                        // loop letters of DNAsequence
+                        for(int j = 0; j < DNAsequence[i].size(); j++){
+                            cout << DNAsequence[i][j];
+                        }
+                        cout << ": ";
+                        // print sequence's number
+                        cout << processedDNA[i] << endl;
                     }
-                    cout << ": ";
-                    // print sequence's number
-                    cout << processedDNA[i] << endl;
+                    cout << endl;
                 }
-                cout << endl;
             }
         }
         // Command: load_dna
