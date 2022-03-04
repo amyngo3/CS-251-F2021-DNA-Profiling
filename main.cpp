@@ -156,30 +156,7 @@ int main(/*int argc, char *argv[]*/) {
         else if(uCommand == "process"){
             // if database is loaded
             if(DNAsequence.size()){
-                // loop number of DNAstrand to compare with DNAsequence O(n^3)
-                // for(int i = 0; i < DNAstrand.size(); i++){
-                //     // frequency of sequence
-                //     int sequenceNum = 0;
-                //     // loop number of DNAsequence patterns (not letters yet)
-                //     for(int j = 0; j < DNAsequence.size(); j++){
-                //         int counter = 0;
-                //         // loop DNAsequence letters
-                //         for(int k = 0; k < DNAsequence[j].size(); k++){
-                //             // if index of DNAstrand has exact letter with index of DNAsequence
-                //             // i for current index of DNAstrand plus k for index number of DNAsequence
-                //             if(i+k < DNAstrand.size())
-                //                 if(DNAstrand[i+k] == DNAsequence[j][k])
-                //                     counter++;
-                //         }
-                //         // cout << counter << endl;
-                //         if(counter == DNAsequence[j].size())
-                //             sequenceNum++;
-                //     }
-                //     // cout << sequenceNum << endl;
-                //     // push counter in processedDNA
-                //     // processedDNA.push_back(sequenceNum);
-                // }
-
+                // O(n^3)
                 // loop number of DNAsequence patterns (not letters yet)
                 for(int i = 0; i < DNAsequence.size(); i++){
                     int counter = 0;
@@ -197,6 +174,8 @@ int main(/*int argc, char *argv[]*/) {
                         }
                         if(counter == DNAsequence[i].size())
                             sequenceNum++;
+                        // reset counter to check for next sequence
+                        counter = 0;
                     }
                     // push counter in processedDNA
                     processedDNA.push_back(sequenceNum);
