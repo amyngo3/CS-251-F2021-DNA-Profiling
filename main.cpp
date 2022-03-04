@@ -39,8 +39,6 @@ int main(/*int argc, char *argv[]*/) {
             cin >> filename;
 
             myfile.open(filename);
-            // when called again, must clear userDB to repopulate
-            DNAsequence.clear();
 
             // file error
             if(!myfile){
@@ -48,6 +46,9 @@ int main(/*int argc, char *argv[]*/) {
             }
             // open file
             else {
+                // when called again, must clear userDB to repopulate
+                DNAsequence.clear();
+
                 string line;
                 getline(myfile, line);  // gets only first line in text file
                 ourvector<char> v;
@@ -65,13 +66,6 @@ int main(/*int argc, char *argv[]*/) {
                     }
                 }
                 DNAsequence.push_back(v);
-
-                // for(int i = 0; i < DNAsequence.size(); i++){
-                //     for(int j = 0; j < DNAsequence[i].size(); j++){
-                //         cout << DNAsequence[i][j];
-                //     }
-                //     cout << endl;
-                // }
 
                 // store people in database
                 string buffer;
