@@ -46,7 +46,7 @@ int main(/*int argc, char *argv[]*/) {
             }
             // open file
             else {
-                // when called again, must clear userDB to repopulate
+                // when called again, must clear DNAsequence to repopulate
                 DNAsequence.clear();
 
                 string line;
@@ -66,6 +66,9 @@ int main(/*int argc, char *argv[]*/) {
                     }
                 }
                 DNAsequence.push_back(v);
+
+                // clear people vector, must clear people to repopulate
+                people.clear();
 
                 // store people in database
                 string buffer;
