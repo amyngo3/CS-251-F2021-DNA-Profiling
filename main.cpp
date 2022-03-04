@@ -157,30 +157,54 @@ int main(/*int argc, char *argv[]*/) {
             // if database is loaded
             if(DNAsequence.size()){
                 // loop number of DNAstrand to compare with DNAsequence O(n^3)
-                for(int i = 0; i < DNAstrand.size(); i++){
+                // for(int i = 0; i < DNAstrand.size(); i++){
+                //     // frequency of sequence
+                //     int sequenceNum = 0;
+                //     // loop number of DNAsequence patterns (not letters yet)
+                //     for(int j = 0; j < DNAsequence.size(); j++){
+                //         int counter = 0;
+                //         // loop DNAsequence letters
+                //         for(int k = 0; k < DNAsequence[j].size(); k++){
+                //             // if index of DNAstrand has exact letter with index of DNAsequence
+                //             // i for current index of DNAstrand plus k for index number of DNAsequence
+                //             if(i+k < DNAstrand.size())
+                //                 if(DNAstrand[i+k] == DNAsequence[j][k])
+                //                     counter++;
+                //         }
+                //         // cout << counter << endl;
+                //         if(counter == DNAsequence[j].size())
+                //             sequenceNum++;
+                //     }
+                //     // cout << sequenceNum << endl;
+                //     // push counter in processedDNA
+                //     // processedDNA.push_back(sequenceNum);
+                // }
+
+                // loop number of DNAsequence patterns (not letters yet)
+                for(int i = 0; i < DNAsequence.size(); i++){
+                    int counter = 0;
                     // frequency of sequence
                     int sequenceNum = 0;
-                    // loop DNAsequence size (not letters yet)
-                    for(int j = 0; j < DNAsequence.size(); j++){
-                        int counter = 0;
-                        // loop DNAsequence letters
-                        for(int k = 0; k < DNAsequence[j].size(); k++){
+                    // loop DNAsequence letters
+                    for(int j = 0; j < DNAstrand.size(); j++){
+                        // loop number of DNAstrand to compare with DNAsequence
+                        for(int k = 0; k < DNAsequence[i].size(); k++){
                             // if index of DNAstrand has exact letter with index of DNAsequence
-                            // i for current index of DNAstrand plus k for index number of DNAsequence
-                            if(i+k < DNAstrand.size())
-                                if(DNAstrand[i+k] == DNAsequence[j][k])
+                            // j for current index of DNAstrand plus k for index number of DNAsequence
+                            if(j+k < DNAstrand.size())
+                                if(DNAstrand[j+k] == DNAsequence[i][k])
                                     counter++;
                         }
-                        if(counter == DNAsequence[j].size())
+                        if(counter == DNAsequence[i].size())
                             sequenceNum++;
                     }
-                    // cout << sequenceNum << endl;
                     // push counter in processedDNA
                     processedDNA.push_back(sequenceNum);
                 }
+
                 cout << "Processing DNA...\n";
             }
-            // no loaded DNA strand
+            // no database loaded
             else {
                 cout << "No database loaded.\n";
             }
