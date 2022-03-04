@@ -147,6 +147,7 @@ int main(/*int argc, char *argv[]*/) {
             } else {
                 // when called again, must clear DNAstrand to repopulate
                 DNAstrand.clear();
+
                 string line;
                 getline(myfile, line);
                 for(char c : line){
@@ -164,6 +165,8 @@ int main(/*int argc, char *argv[]*/) {
             else {
                 // if database is loaded
                 if(DNAsequence.size()){
+                    // when called again, must clear userDB to repopulate
+                    processedDNA.clear();
                     // O(n^3)
                     // loop number of DNAsequence patterns (not letters yet)
                     for(int i = 0; i < DNAsequence.size(); i++){
