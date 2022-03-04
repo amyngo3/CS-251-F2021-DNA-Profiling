@@ -22,7 +22,7 @@ int main() {
     ifstream myfile;   // read file input
     string uCommand, filename;
     ourvector<char> DNA;
-    ourvector<ourvector<char>> strand;    // DNA pattern from small.txt or large.txt
+    ourvector<ourvector<char>> strand;    // DNA strand pattern from small.txt or large.txt
     ourvector<Person> people;   // list of people in text file
     ourvector<int> processedDNA;    // STR count for processed command
 
@@ -46,7 +46,7 @@ int main() {
             }
             // open file
             else {
-                // when called again, must clear DNAsequence to repopulate
+                // when called again, must clear strand to repopulate
                 strand.clear();
 
                 string line;
@@ -116,14 +116,14 @@ int main() {
             if(!processedDNA.size())
                 cout << "\nNo DNA has been processed.\n";
             else {
-                // check if DNAsequence size matches processedDNA size
+                // check if strand size matches processedDNA size
                 if(strand.size() != processedDNA.size())
                     cout << "\nError: database and/or processed DNA are not loaded properly.\n";
                 else {
                     cout << "\nDNA processed, STR counts:\n";
-                    // loop indices of DNAsequence
+                    // loop indices of strand
                     for(int i = 0; i < strand.size(); i++){
-                        // loop letters of DNAsequence
+                        // loop strand letters 
                         for(int j = 0; j < strand[i].size(); j++){
                             cout << strand[i][j];
                         }
@@ -145,7 +145,7 @@ int main() {
             if(!myfile){
                 cout << "\n\tError: unable to open \'" << filename << "\'"<< endl;
             } else {
-                // when called again, must clear DNAstrand to repopulate
+                // when called again, must clear DNA to repopulate
                 DNA.clear();
 
                 string line;
@@ -165,20 +165,20 @@ int main() {
             else {
                 // if database is loaded
                 if(strand.size()){
-                    // when called again, must clear userDB to repopulate
+                    // when called again, must clear processedDNA to repopulate
                     processedDNA.clear();
                     // O(n^3)
-                    // loop number of DNAsequence patterns (not letters yet)
+                    // loop number of DNA strand patterns (not letters yet)
                     for(int i = 0; i < strand.size(); i++){
                         int currentStrandCount = 0;
                         int maxStrandCount = 0;
-                        // loop DNAstrand letters
+                        // loop DNA letters
                         for(int j = 0; j <= DNA.size()-strand[i].size(); j++){
                             int counter = 0;
-                            // loop number of DNAsequence to compare with DNAstrand
+                            // loop number of letters in strand
                             for(int k = 0; k < strand[i].size(); k++){
-                                // if index of DNAstrand has exact letter with index of DNAsequence
-                                // j for current index of DNAstrand plus k for index number of DNAsequence
+                                // if index of DNA has exact letter with index of strand
+                                // j for current index of strand plus k for index number of DNA
                                 if(DNA[j+k] == strand[i][k])
                                     counter++;
                             }
@@ -204,7 +204,7 @@ int main() {
         }
         // Command: search
         else if(uCommand == "search"){
-            // if DNAsequence is not loaded
+            // if strand is not loaded
             if(!strand.size())
                 cout << "No database loaded.\n";
 
