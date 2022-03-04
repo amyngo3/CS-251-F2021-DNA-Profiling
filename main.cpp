@@ -118,7 +118,7 @@ int main() {
             else {
                 // check if DNAsequence size matches processedDNA size
                 if(DNAsequence.size() != processedDNA.size())
-                    cout << "\nError: database and processed DNA are not loaded properly.\n";
+                    cout << "\nError: database and/or processed DNA are not loaded properly.\n";
                 else {
                     cout << "\nDNA processed, STR counts:\n";
                     // loop indices of DNAsequence
