@@ -1,8 +1,8 @@
 //
 //  Project 1 Starter Code - DNA Profiling
 //  TODO:  Put your header info here.  Update line above.
-//  
-//
+//  Amy Ngo - This project is from UIC's CS 251 Fall 2021. I was given this
+//  code is only for practice without using GradeScope, DO NOT plagarize my work!
 
 #include "ourvector.h"
 #include <iostream>
@@ -17,7 +17,7 @@ struct Person{
     ourvector<int> frequency;
 };
 
-int main(/*int argc, char *argv[]*/) {
+int main() {
     //TODO:  Write your code here.  You should have LOTS of function decomposition.
     ifstream myfile;   // read file input
     string uCommand, filename;
@@ -74,13 +74,11 @@ int main(/*int argc, char *argv[]*/) {
                 string buffer;
                 while(getline(myfile, line)){
                     Person p;
-                    // cout << "line: " << line << endl;   // whole single line
                     stringstream ss(line);  // gets 1 line of (name, number[s])
 
                     getline(ss, buffer, ','); // get name
                     p.name = buffer;
                     
-                    // cout << buffer << endl; // names
                     while(getline(ss, buffer, ',')){
                         p.frequency.push_back(stoi(buffer));    // push int
                     }
