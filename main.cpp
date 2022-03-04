@@ -132,6 +132,7 @@ int main(/*int argc, char *argv[]*/) {
                     // print sequence's number
                     cout << processedDNA[i] << endl;
                 }
+                cout << endl;
             }
         }
         // Command: load_dna
@@ -154,48 +155,81 @@ int main(/*int argc, char *argv[]*/) {
         }
         // Command: process
         else if(uCommand == "process"){
-            // if database is loaded
-            if(DNAsequence.size()){
-                // O(n^3)
-                // loop number of DNAsequence patterns (not letters yet)
-                for(int i = 0; i < DNAsequence.size(); i++){
-                    int counter = 0;
-                    // frequency of sequence
-                    int sequenceNum = 0;
-                    // loop DNAsequence letters
-                    for(int j = 0; j < DNAstrand.size(); j++){
-                        // loop number of DNAstrand to compare with DNAsequence
-                        for(int k = 0; k < DNAsequence[i].size(); k++){
-                            // if index of DNAstrand has exact letter with index of DNAsequence
-                            // j for current index of DNAstrand plus k for index number of DNAsequence
-                            if(j+k < DNAstrand.size())
-                                if(DNAstrand[j+k] == DNAsequence[i][k])
-                                    counter++;
-                        }
-                        if(counter == DNAsequence[i].size())
-                            sequenceNum++;
-                        // reset counter to check for next sequence
-                        counter = 0;
-                    }
-                    // push counter in processedDNA
-                    processedDNA.push_back(sequenceNum);
-                }
-
-                cout << "Processing DNA...\n";
-            }
-            // no database loaded
-            else {
-                cout << "No database loaded.\n";
-            }
-
-            // if DNA is loaded
+            // if DNA is not loaded
             if(!DNAstrand.size())
                 cout << "No DNA loaded.\n";
+            else {
+                // if database is loaded
+                if(DNAsequence.size()){
+                    // O(n^3)
+                    // loop number of DNAsequence patterns (not letters yet)
+                    for(int i = 0; i < DNAsequence.size(); i++){
+                        int counter = 0;
+                        // frequency of sequence
+                        int sequenceNum = 0;
+                        // loop DNAsequence letters
+                        for(int j = 0; j < DNAstrand.size(); j++){
+                            // loop number of DNAstrand to compare with DNAsequence
+                            for(int k = 0; k < DNAsequence[i].size(); k++){
+                                // if index of DNAstrand has exact letter with index of DNAsequence
+                                // j for current index of DNAstrand plus k for index number of DNAsequence
+                                if(j+k < DNAstrand.size())
+                                    if(DNAstrand[j+k] == DNAsequence[i][k])
+                                        counter++;
+                            }
+                            if(counter == DNAsequence[i].size())
+                                sequenceNum++;
+                            // reset counter to check for next sequence
+                            counter = 0;
+                        }
+                        // push counter in processedDNA
+                        processedDNA.push_back(sequenceNum);
+                    }
+                    cout << "Processing DNA...\n";
+                }
+                // no database not loaded
+                else {
+                    cout << "No database loaded.\n";
+                }
+            }
         }
         // Command: search
-        // else if(){
-        //     //
-        // }
+        else if(uCommand == "search"){
+            // if DNAsequence is not loaded
+            if(!DNAsequence.size())
+                cout << "No database loaded.\n";
+
+            // if DNA is not loaded
+            if(!DNAstrand.size())
+                cout << "No DNA loaded.\n";
+            
+            if(!processedDNA.size())
+                cout << "No DNA processed.\n";
+            else{
+                cout << "Searching database...\n";
+                int counter = 0;
+                // search processedDNA and people that matches the processed DNA
+                // loop people vector
+                for(int i = 0; i < people.size(); i++){
+                    // loop processedDNA vector
+                    for(int j = 0; j < processedDNA.size(); j++){
+                        // if processedDNA count is the same as the current person's DNA count
+                        if(processedDNA[j] == people[i].frequency[j])
+                            counter++;
+                    }
+                    // if found person in database
+                    if(counter == processedDNA.size()){
+                        cout << "Found in database!  DNA matches: " << people[i].name << endl;
+                        break;
+                    }
+                    // reset counter
+                    counter = 0;
+                }
+                if(counter != processedDNA.size())
+                    // if person not in database
+                    cout << "Not found in database\n";
+            }
+        }
         else if(uCommand == "#"){
             break;
         }
